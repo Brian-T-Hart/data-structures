@@ -37,6 +37,7 @@ class LinkedList {
 
         this.head = node;
         this.size++;
+        return node;
     }//addFirst
 
     addLast(element) {
@@ -53,6 +54,7 @@ class LinkedList {
 
         this.tail = node;
         this.size++;
+        return node;
     }//addLast
 
     contains(element) {
@@ -68,47 +70,50 @@ class LinkedList {
 
     deleteFirst() {
         if (this.size < 1) {
-            return console.log('There is nothing to delete');
+            return undefined;
         }
+
+        let deleted = this.head;
 
         if (this.size === 1) {
             this.head = null;
             this.tail = null;
-            this.size = 0;
-            return;
+        } else {
+            this.head = this.head.next;
         }
 
-        this.head = this.head.next;
         this.size--;
+        return deleted;
     }//deleteFirst
 
     deleteLast() {
         if (this.size < 1) {
-            return console.log('There is nothing to delete');
+            return undefined;
         }
+
+        let deleted = this.tail;
 
         if (this.size === 1) {
             this.head = null;
             this.tail = null;
-            this.size = 0;
-            return;
-        }
+        } else {
+            let current = this.head;
+            let next = this.head.next;
 
-        let current = this.head;
-        let next = this.head.next;
+            for (let i = 0; i < this.size; i++) {
+                if (next === this.tail) {
+                    current.next = null;
+                    this.tail = current;
+                    break;
+                }//if
 
-        //Find the second from last element
-        for (let i = 0; i < this.size; i++) {
-            if (next === this.tail) {
-                current.next = null;
-                this.tail = current;
-                this.size--;
-                break;
-            }
+                current = next;
+                next = current.next;
+            }//for
+        }//if
 
-            current = next;
-            next = current.next;
-        }
+        this.size--;
+        return deleted;
     }//deleteLast
 
     indexOf(element) {
@@ -120,37 +125,5 @@ class LinkedList {
         }
 
         return -1;
-    }
-
-}
-
-let myList = new LinkedList();
-
-for (let i = 1; i < 4; i++) {
-    myList.addFirst(`element ${i}`);
-}
-
-console.log(myList.contains('element 6'));
-
-for (let i = 4; i < 7; i++) {
-    myList.addLast(`element ${i}`);
-}
-
-console.log(myList.contains('element 6'));
-console.log(myList.indexOf('element 6'));
-
-// myList.addFirst('one');
-// myList.addFirst('two');
-// myList.addFirst('three');
-// myList.addLast('four');
-
-// myList.deleteFirst();
-// myList.deleteFirst();
-// myList.deleteFirst();
-// myList.deleteFirst();
-// myList.deleteLast();
-// myList.deleteLast();
-// myList.deleteLast();
-// myList.deleteLast();
-
-console.log(myList);
+    }//indexOf
+}//LinkedList
