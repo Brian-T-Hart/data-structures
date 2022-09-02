@@ -1,46 +1,49 @@
+/*
+    Stack
+    * LIFO - last in - first out
+*/
+
 class Stack {
     constructor() {
-        this.items = []
-        this.count = 0
+        this.items = [];
+        this.count = 0;
     }
 
     isEmpty() {
-        return this.count == 0
+        return this.count == 0;
     }
 
     peek() {
-        return this.items[this.count - 1]
+        return this.items[this.count - 1];
     }
 
     pop() {
-        if(this.count == 0) return console.log('There is nothing left to remove')
-        let deletedItem = this.items[this.count - 1]
-        this.count -= 1
-        console.log(`${deletedItem} removed`)
-        return deletedItem
+        if(this.count == 0) return undefined;
+        let deletedItem = this.items[this.count - 1];
+        this.count -= 1;
+        return deletedItem;
     }
 
     print() {
         let str = '';
 
         for (let i = 0; i < this.count; i++) {
-            str += this.items[i] + ' '
+            str += this.items[i] + ' ';
         }
 
-        return str
+        return str;
     }
 
     push(element) {
-        this.items[this.count] = element
-        console.log(`${element} added to ${this.count}`)
-        this.count +=1
-        return this.count - 1
+        this.items[this.count] = element;
+        this.count +=1;
+        return this.count - 1;
     }
 
     size() {
-        return this.count
+        return this.count;
     }
-}
+}//Stack
 
 const stack = new Stack()
 console.log(stack.isEmpty())
