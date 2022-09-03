@@ -126,4 +126,17 @@ class LinkedList {
 
         return -1;
     }//indexOf
+
+    toArray() {
+        const elements = [];
+
+        let current = this.head;
+
+        while (current) {
+            elements.push(current);
+            current = current.next;
+        }
+
+        return elements;
+    }//toArray
 }//LinkedList
